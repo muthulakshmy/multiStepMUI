@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import {
   Box,
@@ -17,6 +16,17 @@ import SecondPage from "./Pages/SecondPage";
 import ThirdPage from "./Pages/ThirdPage";
 import FourthPage from "./Pages/FourthPage";
 import { FormProvider } from "./FormContext";
+
+const stepStyle = {
+  padding: 2,
+  "& .Mui-active": {
+    "&.MuiStepIcon-root": {
+      fontSize: "2rem",
+      borderColor:"blue"
+    },
+  },
+}
+
 function App() {
   const [activeStep, setActiveStep] = useState(0);
   const steps = [
@@ -29,32 +39,7 @@ function App() {
   const handleStep = (step) => () => {
     setActiveStep(step);
   };
- const stepStyle = {
-    padding: 2,
-    "& .Mui-active": {
-      "&.MuiStepIcon-root": {
-        // color: "white",
-        fontSize: "2rem",
 
-        borderColor:"blue"
-      },
-      "& .MuiStepConnector-line": {
-        borderColor: "white"
-      }
-    },
-    // "& .Mui-completed": {
-      "&.MuiStepIcon-root": {
-        color: "red",
-        borderColor:"white",
-        fontSize: "2rem",
-      },
-      "& .MuiStepConnector-line": {
-        borderColor: "blue"
-      }
-    // }
-  }
-  
-  
   return (
     <FormProvider>
       <Box sx={{ backgroundColor: "lightblue" }}>
@@ -84,7 +69,8 @@ function App() {
                     display: "flex",
                     flexDirection: "column",
                     mt: 5,
-                    mr: 10,
+                    
+                    mr: 10
                   }}
                 >
                   {steps.map((label, index) => {
@@ -101,7 +87,8 @@ function App() {
                           <Box sx={{ textAlign: "start" }}>
                             <StepLabel
                               onClick={handleStep(index)}
-                              sx={{ color: "white" }}
+                       
+                        sx={{ color: "white" }}
                             ></StepLabel>
                           </Box>
 
@@ -130,15 +117,11 @@ function App() {
               </Card>
             </Box>
             <Box>
-              {activeStep === steps.length ? (
-                <>
+              {activeStep === 4 && (
+                
                   <FifthPage />
-                </>
-              ) : (
-                <>
-                  <Box></Box>
-                </>
-              )}
+              
+)}
 
               {activeStep === 0 && (
                 <FirstPage

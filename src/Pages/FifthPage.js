@@ -1,6 +1,7 @@
 import React from "react";
 import Thankyou from "./icons/icon-thank-you.svg";
 import { CardMedia, Box, Typography } from "@mui/material";
+
 const FifthPage = () => {
   return (
     <Box sx={{ p: 7, textAlign: "center", mt: 10 }}>

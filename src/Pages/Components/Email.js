@@ -22,7 +22,7 @@ const Email = (props) => {
     <div>
       <FormControl error={error}>
      
-      <InputLabel>Email Address</InputLabel>
+      <InputLabel sx={{color:"hsl(231, 11%, 63%)"}}>Email Address</InputLabel>
       
       {error && (
           <InputLabel sx={{fontSize:15,ml:30}}>{value ? errorMessage.InvalidUsername : errorMessage.emptyField}</InputLabel>  

@@ -10,8 +10,6 @@ export const FormProvider = ({ children }) => {
   const [selectedPlanState, setSelectedPlanState] = useState("");
   const [planPrice, setPlanPrice] = useState(0);
   const [planData, setPlanData] = useState(false);
-  // const [data,setData]=useState(1)
-
   const [addOnPack, setAddOnPack] = useState(1);
   const [activeButton, setActiveButton] = useState(" ");
   const [addons, setAddons] = useState([
@@ -38,7 +36,7 @@ export const FormProvider = ({ children }) => {
     },
   ]);
   const [selectedAddons, setSelectedAddons] = useState([]);
-  const[checkedState,setCheckedState] = useState(0)
+  const [checkedState, setCheckedState] = useState(0);
   return (
     <FormContext.Provider
       value={{
@@ -57,7 +55,7 @@ export const FormProvider = ({ children }) => {
         addOnPack,
         setAddOnPack,
         checkedState,
-        setCheckedState
+        setCheckedState,
       }}
     >
       {children}

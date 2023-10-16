@@ -4,6 +4,7 @@ let errorMessage = {
   emptyField: "This field is required",
   InvalidUsername:
     "Enter valid username",
+    
 };
 let usernameValidate = /^(?=.*[A-Za-z])[A-Za-z]{5,}$/;
 const Username = (props) => {
@@ -22,7 +23,7 @@ const Username = (props) => {
     <div>
       <FormControl error={error}>
      
-      <InputLabel>Name</InputLabel>
+      <InputLabel sx={{color:"hsl(231, 11%, 63%)"}}>Name</InputLabel>
       
       {error && (
           <InputLabel sx={{fontSize:15,ml:30}}>{value ? errorMessage.InvalidUsername : errorMessage.emptyField}</InputLabel>  

@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, Divider, Link, Typography } from "@mui/material";
 import { useStepContext } from "../FormContext";
+
+const addOnsStyle = {
+  display: "flex",
+  justifyContent: "space-between",
+  color: "hsl(231, 11%, 63%)",
+  fontFamily: "ubuntu",
+};
+
+const fontColorStyle = { color: "hsl(231, 11%, 63%)", fontFamily: "ubuntu" };
+
+const monthPlanStyle = { fontFamily: "ubuntu", fontWeight: 600 };
+
 const FourthPage = ({ activeStep, setActiveStep, steps }) => {
   const { selectedPlanState, planPrice, planData, selectedAddons } =
     useStepContext();
 
   const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
     let addonsPrice = 0;
 
@@ -16,7 +29,6 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
         );
       }, 0);
     }
-
     const total = planPrice + addonsPrice;
     setTotalPrice(total);
   }, [selectedAddons, planData, planPrice]);
@@ -28,18 +40,11 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+
   function handleChange() {
     setActiveStep(1);
   }
-  const addOnsStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    color: "hsl(231, 11%, 63%)",
-    fontFamily: "ubuntu",
-  };
-
-  const fontColorStyle = { color: "hsl(231, 11%, 63%)", fontFamily: "ubuntu" };
-  const monthPlanStyle = { fontFamily: "ubuntu", fontWeight: 600 };
+  
   return (
     <Box sx={{ p: 5 }}>
       <Typography
@@ -73,7 +78,7 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
           <Box>
             <Typography sx={monthPlanStyle}>
               {selectedPlanState}{" "}
-              {planData == "monthly" ? "(monthly)" : "(yearly)"}
+              {planData ? "(yearly)" : "(monthly)"}
             </Typography>
             <Link sx={{ color: "hsl(213, 96%, 18%)" }}>
               <Typography onClick={handleChange} sx={{ fontFamily: "ubuntu" }}>
@@ -83,7 +88,7 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
           </Box>
           <Box>
             <Typography sx={monthPlanStyle}>
-              +${planPrice}/ {planData == "monthly" ? "mo" : "yr"}
+              +${planPrice}/ {planData ? "yr" : "mo"}
             </Typography>
           </Box>
         </Box>
@@ -96,9 +101,11 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
                   {addon.name}
                 </Typography>
                 <Typography sx={{ fontFamily: "ubuntu" }}>
-                  {planData == "monthly"
-                    ? `+${addon.priceMonthly}/mo`
-                    : `+${addon.priceYearly}/yr`}
+                  {planData 
+                    ? `+${addon.priceYearly}/yr`
+                    
+                    
+                    :`+${addon.priceMonthly}/mo` }
                 </Typography>
               </Box>
             ))
@@ -113,9 +120,8 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
         <Typography sx={fontColorStyle}>Total (per month)</Typography>
         <Typography
           sx={{ color: "hsl(243, 100%, 62%)", fontFamily: "ubuntu" }}
-        >{`$${totalPrice}${planData == "monthly" ? "/mo" : "/yr"}`}</Typography>
+        >{`$${totalPrice}${planData ?"/yr" : "/mo"}`}</Typography>
       </Box>
-
       <Box sx={{ display: "flex", flexDirection: "row", pt: 2, mt: 10 }}>
         <Button
           color="inherit"
@@ -129,11 +135,11 @@ const FourthPage = ({ activeStep, setActiveStep, steps }) => {
         <Button
           onClick={handleNext}
           sx={{
-            backgroundColor: "hsl(243, 100%, 62%)",
+            backgroundColor: "hsl(213, 96%, 18%)",
             color: "white",
             fontFamily: "ubuntu",
             "&:hover": {
-              backgroundColor: "primary.main",
+              backgroundColor: "hsl(228, 100%, 84%)",
               opacity: [0.9, 0.8, 0.7],
             },
           }}

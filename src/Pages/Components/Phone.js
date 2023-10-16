@@ -22,7 +22,7 @@ const Phone = (props) => {
     <div>
       <FormControl error={error}>
      
-      <InputLabel>Phone Number</InputLabel>
+      <InputLabel sx={{color:"hsl(231, 11%, 63%)"}}>Phone Number</InputLabel>
       
       {error && (
           <InputLabel sx={{fontSize:15,ml:30}}>{value ? errorMessage.InvalidUsername : errorMessage.emptyField}</InputLabel>  

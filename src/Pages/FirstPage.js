@@ -4,7 +4,7 @@ import Username from "./Components/Username";
 import Email from "./Components/Email";
 import Phone from "./Components/Phone";
 
-const FirstPage = ({ activeStep, setActiveStep, steps }) => {
+const FirstPage = ({ setActiveStep }) => {
   const [errors, setErrors] = useState({ pwd: false });
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,15 +15,6 @@ const FirstPage = ({ activeStep, setActiveStep, steps }) => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
   };
-  function handleUsername(e) {
-    setUserName(e.target.value);
-  }
-  function handleEmail(e) {
-    setEmail(e.target.value);
-  }
-  function handlePhone(e) {
-    setPhone(e.target.value);
-  }
 
   return (
     <Box sx={{ p: 5 }}>
@@ -45,7 +36,7 @@ const FirstPage = ({ activeStep, setActiveStep, steps }) => {
       <Box sx={{ display: "flex", flexDirection: "column", mt: 1, mb: 3 }}>
         <Box>
           <Username
-            onChange={handleUsername}
+            onChange={(e) => setUserName(e.target.value)}
             value={username}
             onBlur={(e, error) => {
               setErrors((state) => ({ ...state, pwd: error }));
@@ -54,7 +45,7 @@ const FirstPage = ({ activeStep, setActiveStep, steps }) => {
         </Box>
         <Box>
           <Email
-            onChange={handleEmail}
+            onChange={(e) => setEmail(e.target.value)}
             value={email}
             onBlur={(e, error) => {
               setErrors((state) => ({ ...state, pwd: error }));
@@ -63,7 +54,7 @@ const FirstPage = ({ activeStep, setActiveStep, steps }) => {
         </Box>
         <Box>
           <Phone
-            onChange={handlePhone}
+            onChange={(e) => setPhone(e.target.value)}
             value={phone}
             onBlur={(e, error) => {
               setErrors((state) => ({ ...state, pwd: error }));
@@ -71,22 +62,21 @@ const FirstPage = ({ activeStep, setActiveStep, steps }) => {
           />
         </Box>
       </Box>
-
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <Box sx={{ flex: "1 1 auto" }} />
         <Button
           onClick={handleNext}
           sx={{
-            backgroundColor: "blue",
+            backgroundColor: "hsl(213, 96%, 18%)",
             color: "white",
             fontFamily: "ubuntu",
             "&:hover": {
-              backgroundColor: "primary.main",
+              backgroundColor: "hsl(228, 100%, 84%)",
               opacity: [0.9, 0.8, 0.7],
             },
           }}
         >
-          {activeStep === steps.length - 1 ? "Finish" : "Next Step"}
+          Next Step
         </Button>
       </Box>
     </Box>
