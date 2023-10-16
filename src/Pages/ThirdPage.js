@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Checkbox, Typography } from "@mui/material";
 import { useStepContext } from "../FormContext";
 
@@ -14,7 +14,11 @@ const ThirdPage = ({ activeStep, setActiveStep, steps }) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   const toggleAddon = (addon,id) => {
-    setCheckedState(id)
+   
+    const a=selectedAddons.filter((a)=>a.id==addon.id)
+    console.log(id,)
+    setCheckedState(a.id)
+  
 setAddOnPack(id)
     setSelectedAddons((addons) =>
       addons.includes(addon)
@@ -22,6 +26,22 @@ setAddOnPack(id)
         : [...addons, addon]
     );
   };
+  useEffect(()=>{
+    
+    // const a=selectedAddons.map((a)=>{
+    //   // if( a.id==addon.id){
+    //     setCheckedState({})
+
+    //   // }
+     
+    //  })
+    
+  // console.log(a)
+    
+ 
+
+
+  },[selectedAddons,addons])
   const addOnBoxStyle = {
     border: "1px solid hsl(231, 11%, 63%)",
     borderRadius: 2,
@@ -62,7 +82,7 @@ setAddOnPack(id)
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         {addons.map((addon, index) => (
-          <Box sx={{...addOnBoxStyle,border:checkedState==index? "2px solid blue":"1px solid gray",}} >
+          <Box sx={{...addOnBoxStyle,border:checkedState==index+1? "2px solid blue":"1px solid gray",}} >
             <Checkbox 
               Checked={selectedAddons.includes(addons)}
               onChange={() => toggleAddon(addon,index)}

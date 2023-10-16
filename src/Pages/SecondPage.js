@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, CardMedia, Typography } from "@mui/material";
 import { useStepContext } from "../FormContext";
 import Arcade from "./icons/icon-arcade.svg";
@@ -58,6 +58,11 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
       setPlanData("monthly");
     }
   }
+  // useEffect(()=>{
+    
+  // setActiveButton(plan)
+
+  // },[setPlan,setPlanData])
   const priceAlignStyle = { textAlign: "left" };
   const iconStyle = { width: 30, height: 30, mb: 5 };
   return (

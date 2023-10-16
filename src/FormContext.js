@@ -9,7 +9,7 @@ export const useStepContext = () => {
 export const FormProvider = ({ children }) => {
   const [selectedPlanState, setSelectedPlanState] = useState("");
   const [planPrice, setPlanPrice] = useState(0);
-  const [planData, setPlanData] = useState("monthly");
+  const [planData, setPlanData] = useState(" monthly");
   // const [data,setData]=useState(1)
 
   const [addOnPack, setAddOnPack] = useState(1);
@@ -38,7 +38,7 @@ export const FormProvider = ({ children }) => {
     },
   ]);
   const [selectedAddons, setSelectedAddons] = useState([]);
-  const[checkedState,setCheckedState] = useState(1)
+  const[checkedState,setCheckedState] = useState(0)
   return (
     <FormContext.Provider
       value={{
