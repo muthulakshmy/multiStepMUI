@@ -63,9 +63,10 @@ setAddOnPack(id)
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         {addons.map((addon, index) => (
-          <Box sx={{...addOnBoxStyle,border:checkedState==index? "2px solid blue":"1px solid gray",}} >
+          <Box sx={{...addOnBoxStyle,border:selectedAddons.includes(addon)? "1px solid blue":"1px solid gray",}} >
             <Checkbox 
-              Checked={selectedAddons.includes(addons)}
+              checked={selectedAddons.includes(addon)}
+              // checked={}
               onChange={() => toggleAddon(addon,index)}
             />
             <Box sx={{ mr: 15 }}>

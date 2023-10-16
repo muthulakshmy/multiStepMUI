@@ -29,7 +29,32 @@ function App() {
   const handleStep = (step) => () => {
     setActiveStep(step);
   };
+ const stepStyle = {
+    padding: 2,
+    "& .Mui-active": {
+      "&.MuiStepIcon-root": {
+        // color: "white",
+        fontSize: "2rem",
 
+        borderColor:"blue"
+      },
+      "& .MuiStepConnector-line": {
+        borderColor: "white"
+      }
+    },
+    // "& .Mui-completed": {
+      "&.MuiStepIcon-root": {
+        color: "red",
+        borderColor:"white",
+        fontSize: "2rem",
+      },
+      "& .MuiStepConnector-line": {
+        borderColor: "blue"
+      }
+    // }
+  }
+  
+  
   return (
     <FormProvider>
       <Box sx={{ backgroundColor: "lightblue" }}>
@@ -55,7 +80,7 @@ function App() {
                 <Stepper
                   nonLinear
                   activeStep={activeStep}
-                  sx={{
+                  sx={{...stepStyle,
                     display: "flex",
                     flexDirection: "column",
                     mt: 5,

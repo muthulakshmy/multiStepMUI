@@ -9,7 +9,7 @@ export const useStepContext = () => {
 export const FormProvider = ({ children }) => {
   const [selectedPlanState, setSelectedPlanState] = useState("");
   const [planPrice, setPlanPrice] = useState(0);
-  const [planData, setPlanData] = useState(" monthly");
+  const [planData, setPlanData] = useState(false);
   // const [data,setData]=useState(1)
 
   const [addOnPack, setAddOnPack] = useState(1);

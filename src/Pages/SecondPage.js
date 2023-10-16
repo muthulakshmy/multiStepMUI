@@ -6,6 +6,22 @@ import Advanced from "./icons/icon-advanced.svg";
 import Pro from "./icons/icon-pro.svg";
 import Switch from "@mui/material/Switch";
 
+import { alpha, styled } from '@mui/material/styles';
+import { indigo } from '@mui/material/colors';
+
+
+const IndigoSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: indigo[600],
+    '&:hover': {
+      backgroundColor: alpha(indigo[600], theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: indigo[600],
+  },
+}));
+
 const label = { inputProps: { "aria-label": "Size switch demo" } };
 const planStyle = {
   color: "hsl(213, 96%, 18%)",
@@ -24,8 +40,8 @@ const priceStyle = {
 };
 
 const SecondPage = ({ activeStep, setActiveStep, steps }) => {
-  const [plan, setPlan] = useState("monthly");
-  const { setSelectedPlanState, setPlanPrice, setPlanData,activeButton,setActiveButton } = useStepContext();
+  // const [plan, setPlan] = useState(false);
+  const { setSelectedPlanState, setPlanPrice,planData, setPlanData,activeButton,setActiveButton } = useStepContext();
   // const [activeButton, setActiveButton] = useState({
   //   first:false,
   //   second: false,
@@ -50,19 +66,27 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
   };
 
   function handlePlan() {
-    if (plan == "monthly") {
-      setPlan("yearly");
-      setPlanData("yearly");
-    } else {
-      setPlan("monthly");
-      setPlanData("monthly");
-    }
+    // if (plan === "monthly") {
+      // setPlan(!plan);
+      setPlanData(!planData);
+    // } else {
+    //   setPlan("yearly");
+    //   setPlanData(plan);
+    // }
   }
-  // useEffect(()=>{
+  
+  useEffect(()=>{
+    // setPlan(plan)
+    // setPlanData(plan)
+    // if (plan == "monthly") {
+    //   setPlan("yearly");
+    //   setPlanData(plan);
+    // } else {
+    //   setPlan("monthly");
+    //   setPlanData(plan);
+    // }
     
-  // setActiveButton(plan)
-
-  // },[setPlan,setPlanData])
+  },[])
   const priceAlignStyle = { textAlign: "left" };
   const iconStyle = { width: 30, height: 30, mb: 5 };
   return (
@@ -86,10 +110,10 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
         <Button
           variant="outlined"
           name="Arcade"
-          sx={{border:activeButton=="Arcade"? "2px solid blue":"1px solid gray",width: 120, height: 150,}}
+          sx={{border:activeButton=="Arcade"? "1px solid blue":"1px solid gray",width: 120, height: 150,}}
           
           onClick={(e) =>
-            handlePlanSelection("Arcade", plan == "monthly" ? 9 : 90)
+            handlePlanSelection("Arcade", planData ? 9 : 90)
           }
         >
           <Box>
@@ -98,13 +122,14 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
             </Box>
             <Box sx={priceAlignStyle}>
               <Typography sx={planStyle}>Arcade</Typography>
-              {plan == "monthly" ? (
-                <Typography sx={priceStyle}>$9/mo</Typography>
-              ) : (
+              {planData  ? (
                 <Box>
-                  <Typography sx={priceStyle}>$90/yr</Typography>
-                  <Typography sx={freeStyle}>2 months free</Typography>
-                </Box>
+                <Typography sx={priceStyle}>$90/yr</Typography>
+                <Typography sx={freeStyle}>2 months free</Typography>
+              </Box>
+              ) : (
+                <Typography sx={priceStyle}>$9/mo</Typography>
+                
               )}
             </Box>
           </Box>
@@ -116,7 +141,7 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
           sx={{border:activeButton=="Advanced"? "2px solid blue":"1px solid gray",width: 120, height: 150,mr:2,ml:2}}
 
           onClick={(e) =>
-            handlePlanSelection("Advanced", plan == "monthly" ? 12 : 120)
+            handlePlanSelection("Advanced", planData ? 12 : 120)
           }
         >
           <Box>
@@ -124,13 +149,15 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
             <Box sx={priceAlignStyle}>
               <Typography sx={planStyle}>Advanced</Typography>
 
-              {plan == "monthly" ? (
-                <Typography sx={priceStyle}>$12/mo</Typography>
-              ) : (
+              {planData ? (
                 <>
-                  <Typography sx={priceStyle}>$120/yr</Typography>
-                  <Typography sx={freeStyle}>2 months free</Typography>
-                </>
+                <Typography sx={priceStyle}>$120/yr</Typography>
+                <Typography sx={freeStyle}>2 months free</Typography>
+              </>
+              ) : (
+                
+                <Typography sx={priceStyle}>$12/mo</Typography>
+
               )}
             </Box>
           </Box>
@@ -141,20 +168,22 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
           sx={{border:activeButton=="Pro"? "2px solid blue":"1px solid gray",width: 120, height: 150,}}
 
           onClick={(e) =>
-            handlePlanSelection("Pro", plan == "monthly" ? 15 : 150)
+            handlePlanSelection("Pro", planData ? 15 : 150)
           }
         >
           <Box>
             <CardMedia image={Pro} sx={iconStyle}></CardMedia>
             <Box sx={priceAlignStyle}>
               <Typography sx={planStyle}>Pro</Typography>
-              {plan == "monthly" ? (
-                <Typography sx={priceStyle}>$15/mo</Typography>
+              {planData ? (
+                 <>
+                 <Typography sx={priceStyle}>$150/yr</Typography>
+                 <Typography sx={freeStyle}>2 months free</Typography>
+               </>
               ) : (
-                <>
-                  <Typography sx={priceStyle}>$150/yr</Typography>
-                  <Typography sx={freeStyle}>2 months free</Typography>
-                </>
+               
+                <Typography sx={priceStyle}>$15/mo</Typography>
+
               )}
             </Box>
           </Box>
@@ -181,7 +210,7 @@ const SecondPage = ({ activeStep, setActiveStep, steps }) => {
             Monthly
           </Typography>
 
-          <Switch {...label} onChange={handlePlan} />
+          <IndigoSwitch {...label}   onChange={handlePlan} checked={planData}   />
           <Typography
             sx={{
               fontSize: 16,
